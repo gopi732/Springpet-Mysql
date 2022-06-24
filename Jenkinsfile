@@ -6,7 +6,7 @@ pipeline {
 
         stage ('Git Checkout') {
             steps {
-                git branch: 'master', credentialsId: 'github', url: 'https://github.com/gopi732/tomcat-mysql.git'
+                git branch: 'master', credentialsId: 'github', url: 'https://github.com/gopi732/spring-pet.git'
             }
         }
         
@@ -17,8 +17,3 @@ pipeline {
         }
     }
 }
-
-    © 2022 GitHub, Inc.
-
-    Terms
-    Privacy
