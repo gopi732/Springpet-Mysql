@@ -12,7 +12,5 @@ services:
       ports:
          - "8089:8080"
       restart: always
-      depends_on:
-         - database
    
    
