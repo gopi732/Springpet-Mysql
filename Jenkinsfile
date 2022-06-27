@@ -19,8 +19,8 @@ pipeline {
         }
         stage ('Rename Docker Image') {
             steps {
-                sh 'docker tag spring-pet_database  saigopi123456/spring-database'
-                sh 'docker tag spring-pet_spring saigopi123456/spring-app'       
+                sh 'docker tag spring-pet-mysql_database  saigopi123456/spring-database'
+                sh 'docker tag spring-pet-mysql_spring saigopi123456/spring-app'       
             }
         }
         stage ('Login DockerHub') {
