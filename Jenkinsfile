@@ -34,9 +34,7 @@ pipeline {
         }
         stage ('push Docker images') {
             steps {
-                sh 'docker push saigopi123456/spring-database'
-                sh 'docker push saigopi123456/spring-app'
-
+                sh 'docker push saigopi123456/spring-database && docker push saigopi123456/spring-app'
             }
         }
     }
