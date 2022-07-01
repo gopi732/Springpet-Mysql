@@ -19,8 +19,7 @@ pipeline {
         }
         stage ('Rename Docker Image') {
             steps {
-                sh 'docker tag spring-pet-mysql_database  saigopi123456/spring-database'
-                sh 'docker tag spring-pet-mysql_spring saigopi123456/spring-app'       
+                sh 'docker tag spring-pet-mysql_database  saigopi123456/spring-database && docker tag spring-pet-mysql_spring saigopi123456/spring-app'       
             }
         }
         stage ('Login DockerHub') {
@@ -30,9 +29,7 @@ pipeline {
         }
         stage ('push Docker images') {
             steps {
-                sh 'docker push saigopi123456/spring-database'
-                sh 'docker push saigopi123456/spring-app'
-
+                sh 'docker push saigopi123456/spring-database &&  docker push saigopi123456/spring-app'
             }
         }
         stage ('Remove Docker Images') {
