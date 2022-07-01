@@ -11,7 +11,11 @@ pipeline {
     }
 
     stages {
-        
+        stage ('Clean up') {
+            steps {
+                sh 'docker stop $(docker ps -a -q) || true && docker rm $(docker ps -a -q) || true && docker rmi -f $(docker images -a -q) || true'  
+            }
+        }
         stage ('Build Docker Image') {
             steps {
                 sh 'docker-compose build '       
@@ -33,11 +37,6 @@ pipeline {
                 sh 'docker push saigopi123456/spring-database'
                 sh 'docker push saigopi123456/spring-app'
 
-            }
-        }
-        stage ('Remove Docker Images') {
-            steps {
-                sh 'docker rmi -f $(docker images -a -q)'
             }
         }
     }
