@@ -3,7 +3,7 @@ pipeline {
     agent any
     
     environment {
-        DOCKER_HUB_REPO = "saigopi123456/springpet
+        DOCKER_HUB_REPO = "saigopi123456/springpet"
         DOCKER_HUB_REPO1 = "saigopi123456/mysql"
         CONTAINER_NAME = "spring-mysql-container"
         http_proxy = 'http://127.0.0.1:3128/'
