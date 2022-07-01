@@ -34,7 +34,7 @@ pipeline {
         }
         stage ('Container Testing '){
             steps {
-                    sh 'wget localhost:8089 && wget localhost:3308'
+                    sh 'wget localhost:8089'
             }
         }
         
