@@ -30,10 +30,5 @@ pipeline {
                 sh 'docker push saigopi123456/spring-database &&  docker push saigopi123456/spring-app'
             }
         }
-        stage ('Remove Docker Images') {
-            steps {
-                sh 'docker rmi -f $(docker images -a -q)'
-            }
-        }
     }
 }
