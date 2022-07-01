@@ -42,7 +42,7 @@ pipeline {
         stage('Docker login and Push image to DockerHub'){
             steps{
                    withCredentials([string(credentialsId: 'dockerhub-pwd', variable: 'dockerhub')]) {
-                   sh 'docker login -u saigopi123456 -p ${dockerhub} && docker push -t $DOCKER_HUB_REPO:$BUILD_NUMBER && docker push -t $DOCKER_HUB_REPO1:$BUILD_NUMBER '
+                   sh 'docker login -u saigopi123456 -p ${dockerhub} && docker push $DOCKER_HUB_REPO:$BUILD_NUMBER && docker push $DOCKER_HUB_REPO1:$BUILD_NUMBER '
 }
             }
         }
