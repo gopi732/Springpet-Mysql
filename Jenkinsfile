@@ -3,7 +3,8 @@ pipeline {
     agent any
     
     environment {
-        DOCKERHUB_CREDENTIALS = credentials('dockerhub')
+        DOCKER_HUB_REPO = "saigopi123456/springpet-mysql"
+        CONTAINER_NAME = "spring-mysql-container"
         http_proxy = 'http://127.0.0.1:3128/'
         https_proxy = 'http://127.0.0.1:3128/'
         ftp_proxy = 'http://127.0.0.1:3128/'
@@ -23,20 +24,25 @@ pipeline {
         }
         stage ('Rename Docker Image') {
             steps {
-                sh 'docker tag spring-pet-mysql_database  saigopi123456/spring-database'
-                sh 'docker tag spring-pet-mysql_spring saigopi123456/spring-app'       
+                sh 'docker tag spring-pet-mysql_database  saigopi123456/spring-mysql-database && docker tag spring-pet-mysql_spring saigopi123456/spring-mysql-app'       
             }
         }
-        stage ('Login DockerHub') {
+        stage ('create container'){
             steps {
-                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR  --password-stdin'       
+                    sh 'docker run -d --name $CONTAINER_NAME -p 9000:8080 --restart unless-stopped $DOCKER_HUB_REPO:$BUILD_NUMBER && docker ps'
             }
         }
-        stage ('push Docker images') {
+        stage ('Container Testing '){
             steps {
-                sh 'docker push saigopi123456/spring-database'
-                sh 'docker push saigopi123456/spring-app'
-
+                    sh 'wget localhost:800$BUILD_NUMBER'
+            }
+        }
+        
+        stage('Docker login and Push image to DockerHub'){
+            steps{
+                   withCredentials([string(credentialsId: 'dockerhub-pwd', variable: 'dockerhub')]) {
+                   sh 'docker login -u saigopi123456 -p ${dockerhub} && docker push $DOCKER_HUB_REPO:$BUILD_NUMBER'
+}
             }
         }
     }
