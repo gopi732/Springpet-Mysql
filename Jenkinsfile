@@ -1,7 +1,6 @@
 // Declarative pipeline
 pipeline {
     agent any
-    
     environment {
         DOCKERHUB_CREDENTIALS = credentials('dockerhub')
         http_proxy = 'http://127.0.0.1:3128/'
@@ -9,7 +8,6 @@ pipeline {
         ftp_proxy = 'http://127.0.0.1:3128/'
         socks_proxy = 'socks://127.0.0.1:3128/'
     }
-
     stages {
         stage ('Clean up') {
             steps {
