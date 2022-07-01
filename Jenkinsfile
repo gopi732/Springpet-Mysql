@@ -29,7 +29,7 @@ pipeline {
         }
         stage ('create container'){
             steps {
-                    sh 'docker run -d --name $CONTAINER_NAME -p 9000:8080 --restart unless-stopped $DOCKER_HUB_REPO:$BUILD_NUMBER && docker ps'
+                    sh 'docker-compose up -d && docker ps'
             }
         }
         stage ('Container Testing '){
